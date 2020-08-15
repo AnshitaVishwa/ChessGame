@@ -38,12 +38,17 @@ public:
             if (i != 7) cout << "------------------------------------------------------------------\n";
         }
     }
+    bool checkValidityOfMoves () {
+        if (pawnMoves.count({ux, uy}) and pawnMoves[{ux, uy}].count({vx, vy})) return true;
+        if (rookMoves.count({ux, uy}) and rookMoves[{ux, uy}].count({vx, vy})) return true;
+        return false;
+    }
     void getInput () {
         cout << "Select the position that you want to move: ";
         cin >> ux >> uy;
         cout << "Select the position where to move: ";
         cin >> vx >> vy;
-        if (!(pawnMoves.count({ux, uy}) and pawnMoves[{ux, uy}].count({vx, vy}))) {
+        if (checkValidityOfMoves() == false) {
             getInput();
         }
     }
