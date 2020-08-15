@@ -6,7 +6,7 @@ class Chess {
 private:
     char board[8][8];
     int  ux, uy, vx, vy;
-    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves;
+    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves, knightMoves;
 public:
     Chess () {
         // Initially the board is empty
@@ -23,10 +23,14 @@ public:
         for (int i = 0; i < 8; ++i) {
             board[6][i] = 'p';
         }
-        // The white rooks
+        // The white rook
         board[0][0] = 'R', board[0][7] = 'R';
         // the black rook
         board[7][0] = 'r', board[7][7] = 'r';
+        // the while knight
+        board[0][1] = 'N', board[0][6] = 'N';
+        // the black knight
+        board[7][1] = 'n', board[7][6] = 'n';
     }
     void displayBoard () {
         for (int i = 0; i < 8; ++i) {
@@ -41,6 +45,7 @@ public:
     bool checkValidityOfMoves () {
         if (pawnMoves.count({ux, uy}) and pawnMoves[{ux, uy}].count({vx, vy})) return true;
         if (rookMoves.count({ux, uy}) and rookMoves[{ux, uy}].count({vx, vy})) return true;
+        if (knightMoves.count({ux, uy}) and knightMoves[{ux, uy}].count({vx, vy})) return true;
         return false;
     }
     void getInput () {
@@ -174,6 +179,47 @@ public:
         }
         debug(rookMoves);
     }
+    bool checkValidSquareForKnight (int r, int c, char C) {
+        if (r < 0 || r > 7 || c < 0 || c > 7) return false;
+        if (C == 'N') {
+            if (board[r][c] == 'P' || board[r][c] == 'K' || board[r][c] == 'Q' || board[r][c] == 'B' || board[r][c] == 'N' || board[r][c] == 'R') {
+                return false;
+            }
+        }
+        if (C == 'n') {
+            if (board[r][c] == 'p' || board[r][c] == 'k' || board[r][c] == 'q' || board[r][c] == 'b' || board[r][c] == 'n' || board[r][c] == 'r') {
+                return false;
+            }
+        }
+        return true;
+    }
+    void knightValidMoves () {
+        knightMoves.clear();
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (board[i][j] == 'N') {
+                    if (checkValidSquareForKnight(i - 2, j + 1, 'N')) knightMoves[{i, j}].insert({i - 2, j + 1});
+                    if (checkValidSquareForKnight(i - 2, j - 1, 'N')) knightMoves[{i, j}].insert({i - 2, j - 1});
+                    if (checkValidSquareForKnight(i + 2, j + 1, 'N')) knightMoves[{i, j}].insert({i + 2, j + 1});
+                    if (checkValidSquareForKnight(i + 2, j - 1, 'N')) knightMoves[{i, j}].insert({i + 2, j - 1});
+                    if (checkValidSquareForKnight(i - 1, j + 2, 'N')) knightMoves[{i, j}].insert({i - 1, j + 2});
+                    if (checkValidSquareForKnight(i + 1, j + 2, 'N')) knightMoves[{i, j}].insert({i + 1, j + 2});
+                    if (checkValidSquareForKnight(i - 1, j - 2, 'N')) knightMoves[{i, j}].insert({i - 1, j - 2});
+                    if (checkValidSquareForKnight(i + 1, j - 2, 'N')) knightMoves[{i, j}].insert({i + 1, j - 2});
+                } else if (board[i][j] == 'n') {
+                    if (checkValidSquareForKnight(i - 2, j + 1, 'n')) knightMoves[{i, j}].insert({i - 2, j + 1});
+                    if (checkValidSquareForKnight(i - 2, j - 1, 'n')) knightMoves[{i, j}].insert({i - 2, j - 1});
+                    if (checkValidSquareForKnight(i + 2, j + 1, 'n')) knightMoves[{i, j}].insert({i + 2, j + 1});
+                    if (checkValidSquareForKnight(i + 2, j - 1, 'n')) knightMoves[{i, j}].insert({i + 2, j - 1});
+                    if (checkValidSquareForKnight(i - 1, j + 2, 'n')) knightMoves[{i, j}].insert({i - 1, j + 2});
+                    if (checkValidSquareForKnight(i + 1, j + 2, 'n')) knightMoves[{i, j}].insert({i + 1, j + 2});
+                    if (checkValidSquareForKnight(i - 1, j - 2, 'n')) knightMoves[{i, j}].insert({i - 1, j - 2});
+                    if (checkValidSquareForKnight(i + 1, j - 2, 'n')) knightMoves[{i, j}].insert({i + 1, j - 2});
+                }
+            }
+        }
+        debug(knightMoves);
+    }
 };
 
 int main () {
@@ -182,6 +228,7 @@ int main () {
     while(1) {
         C.pawnValidMoves();
         C.rookValidMoves();
+        C.knightValidMoves();
         C.getInput();
         C.boardMark();
         C.displayBoard();
