@@ -6,7 +6,7 @@ class Chess {
 private:
     char board[8][8];
     int  ux, uy, vx, vy;
-    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves, knightMoves, kingMoves;
+    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves, knightMoves, kingMoves, bishopMoves;
 public:
     Chess () {
         // Initially the board is empty
@@ -35,7 +35,10 @@ public:
         board[0][3] = 'K';
         // the black king denoted by 'k'
         board[7][3] = 'k';
-
+        // the white bishop denoted by 'B'
+        board[0][2] = 'B', board[0][5] = 'B';
+        // the black bishop denoted by 'b'
+        board[7][2] = 'b', board[7][5] = 'b';
     }
     void displayBoard () {
         for (int i = 0; i < 8; ++i) {
@@ -51,6 +54,7 @@ public:
         if (pawnMoves.count({ux, uy}) and pawnMoves[{ux, uy}].count({vx, vy})) return true;
         if (rookMoves.count({ux, uy}) and rookMoves[{ux, uy}].count({vx, vy})) return true;
         if (knightMoves.count({ux, uy}) and knightMoves[{ux, uy}].count({vx, vy})) return true;
+        if (bishopMoves.count({ux, uy}) and bishopMoves[{ux, uy}].count({vx, vy})) return true;
         return false;
     }
     void getInput () {
@@ -193,8 +197,73 @@ public:
         }
         debug(knightMoves);
     }
-    void kingValidMoves () {
-
+    void checkValidSquareForBishop (int i, int j, char C) {
+        int r, c;
+        r = i - 1, c = j + 1;
+        while (r >= 0 and c < 8) {
+            if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
+                if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
+                if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            bishopMoves[{i, j}].insert({r, c});
+            --r, ++c;
+        }
+        r = i - 1, c = j - 1;
+        while (r >= 0 and c >= 0) {
+            if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
+                if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
+                if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            bishopMoves[{i, j}].insert({r, c});
+            --r, --c;
+        } 
+        r = i + 1, c = j - 1;
+        while (r < 8 and c >= 0) {
+            if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
+                if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
+                if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            bishopMoves[{i, j}].insert({r, c});
+            ++r, --c;
+        }
+        r = i + 1, c = j + 1;
+        while (r < 8 and c < 8) {
+            if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
+                if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
+                if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                break;
+            }
+            bishopMoves[{i, j}].insert({r, c});
+            ++r, ++c;
+        }
+    }
+    void bishopValidMoves () {
+        bishopMoves.clear();
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (board[i][j] == 'B') {
+                    checkValidSquareForBishop(i, j, 'B');
+                } else if (board[i][j] == 'b') {
+                    checkValidSquareForBishop(i, j, 'b');
+                }
+            }
+        }
+        debug(bishopMoves);
     }
 };
 
@@ -205,6 +274,7 @@ int main () {
         C.pawnValidMoves();
         C.rookValidMoves();
         C.knightValidMoves();
+        C.bishopValidMoves();
         C.getInput();
         C.boardMark();
         C.displayBoard();
