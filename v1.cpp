@@ -78,13 +78,97 @@ public:
         }
         debug(pawnMoves);
     }
-    // void rookValidMoves () {
-    //     for (int i = 0; i < 8; ++i) {
-    //         for (int j = 0; j < 8; ++j) {
-    //             if ()
-    //         }
-    //     }
-    // }
+    void rookValidMoves () {
+        rookMoves.clear();
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (board[i][j] == 'R') {
+                    for (int c = j + 1; c < 8; ++c) {
+                        if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
+                            break;
+                        }
+                        if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
+                            rookMoves[{i, j}].insert({i, c});
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({i, c});
+                    }
+                    for (int c = j - 1; c >= 0; --c) {
+                        if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
+                            break;
+                        }
+                        if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
+                            rookMoves[{i, j}].insert({i, c});
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({i, c});
+                    }
+                    for (int r = i + 1; r < 8; ++r) {
+                        if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
+                            break;
+                        }
+                        if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
+                            rookMoves[{i, j}].insert({r, j});
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({r, j});
+                    }
+                    for (int r = i - 1; r >= 0; --r) {
+                        if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
+                            break;
+                        }
+                        if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
+                            rookMoves[{i, j}].insert({r, j});
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({r, j});
+                    }
+                } else if (board[i][j] == 'r') {
+                    for (int c = j + 1; c < 8; ++c) {
+                        if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
+                            rookMoves[{i, j}].insert({i, c});
+                            break;
+                        }
+                        if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({i, c});
+                    }
+                    for (int c = j - 1; c >= 0; --c) {
+                        if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
+                            rookMoves[{i, j}].insert({i, c});
+                            break;
+                        }
+                        if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({i, c});
+                    }
+                    for (int r = i + 1; r < 8; ++r) {
+                        if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
+                            rookMoves[{i, j}].insert({r, j});
+                            break;
+                        }
+                        if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({r, j});
+                    }
+                    for (int r = i - 1; r >= 0; --r) {
+                        if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
+                            rookMoves[{i, j}].insert({r, j});
+                            break;
+                        }
+                        if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
+                            break;
+                        }
+                        rookMoves[{i, j}].insert({r, j});
+                    }
+                }
+            }
+        }
+        debug(rookMoves);
+    }
 };
 
 int main () {
@@ -92,6 +176,7 @@ int main () {
     C.displayBoard();
     while(1) {
         C.pawnValidMoves();
+        C.rookValidMoves();
         C.getInput();
         C.boardMark();
         C.displayBoard();
