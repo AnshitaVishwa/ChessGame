@@ -6,7 +6,7 @@ class Chess {
 private:
     char board[8][8];
     int  ux, uy, vx, vy;
-    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves, knightMoves, kingMoves, bishopMoves;
+    map<pair<int, int>, set<pair<int, int>>> pawnMoves, rookMoves, knightMoves, kingMoves, bishopMoves, queenMoves;
 public:
     Chess () {
         // Initially the board is empty
@@ -39,6 +39,10 @@ public:
         board[0][2] = 'B', board[0][5] = 'B';
         // the black bishop denoted by 'b'
         board[7][2] = 'b', board[7][5] = 'b';
+        // the white Queen denoted by 'Q'
+        board[0][4] = 'Q';
+        // the black Queen denoted by 'q'
+        board[7][4] = 'q';
     }
     void displayBoard () {
         for (int i = 0; i < 8; ++i) {
@@ -55,6 +59,7 @@ public:
         if (rookMoves.count({ux, uy}) and rookMoves[{ux, uy}].count({vx, vy})) return true;
         if (knightMoves.count({ux, uy}) and knightMoves[{ux, uy}].count({vx, vy})) return true;
         if (bishopMoves.count({ux, uy}) and bishopMoves[{ux, uy}].count({vx, vy})) return true;
+        if (queenMoves.count({ux, uy}) and queenMoves[{ux, uy}].count({vx, vy})) return true;
         return false;
     }
     void getInput () {
@@ -101,46 +106,58 @@ public:
         for (int c = j + 1; c < 8; ++c) {
             if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
                 if (C == 'r') rookMoves[{i, j}].insert({i, c});
+                if (C == 'q') queenMoves[{i, j}].insert({i, c});
                 break;
             }
             if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
                 if (C == 'R') rookMoves[{i, j}].insert({i, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({i, c});
                 break;
             }
-            rookMoves[{i, j}].insert({i, c});
+            if (C == 'R' || C == 'r') rookMoves[{i, j}].insert({i, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({i, c});
         }
         for (int c = j - 1; c >= 0; --c) {
             if (board[i][c] == 'P' || board[i][c] == 'R' || board[i][c] == 'N' || board[i][c] == 'K' || board[i][c] == 'B' || board[i][c] == 'Q') {
                 if (C == 'r') rookMoves[{i, j}].insert({i, c});
+                if (C == 'q') queenMoves[{i, j}].insert({i, c});
                 break;
             }
             if (board[i][c] == 'p' || board[i][c] == 'r' || board[i][c] == 'n' || board[i][c] == 'k' || board[i][c] == 'b' || board[i][c] == 'q') {
                 if (C == 'R') rookMoves[{i, j}].insert({i, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({i, c});
                 break;
             }
-            rookMoves[{i, j}].insert({i, c});
+            if (C == 'R' || C == 'r') rookMoves[{i, j}].insert({i, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({i, c});
         }
         for (int r = i + 1; r < 8; ++r) {
             if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
                 if (C == 'r') rookMoves[{i, j}].insert({r, j});
+                if (C == 'q') queenMoves[{i, j}].insert({r, j});
                 break;
             }
             if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
                 if (C == 'R') rookMoves[{i, j}].insert({r, j});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, j});
                 break;
             }
-            rookMoves[{i, j}].insert({r, j});
+            if (C == 'R' || C == 'r') rookMoves[{i, j}].insert({r, j});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, j});
         }
         for (int r = i - 1; r >= 0; --r) {
             if (board[r][j] == 'P' || board[r][j] == 'R' || board[r][j] == 'N' || board[r][j] == 'K' || board[r][j] == 'B' || board[r][j] == 'Q') {
                 if (C == 'r') rookMoves[{i, j}].insert({r, j});
+                if (C == 'q') queenMoves[{i, j}].insert({r, j});
                 break;
             }
             if (board[r][j] == 'p' || board[r][j] == 'r' || board[r][j] == 'n' || board[r][j] == 'k' || board[r][j] == 'b' || board[r][j] == 'q') {
                 if (C == 'R') rookMoves[{i, j}].insert({r, j});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, j});
                 break;
             }
-            rookMoves[{i, j}].insert({r, j});
+            if (C == 'R' || C == 'r') rookMoves[{i, j}].insert({r, j});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, j});
         }
     }
     void rookValidMoves () {
@@ -203,52 +220,64 @@ public:
         while (r >= 0 and c < 8) {
             if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
                 if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
             if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
                 if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
-            bishopMoves[{i, j}].insert({r, c});
+            if (C == 'B' || C == 'b') bishopMoves[{i, j}].insert({r, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, c});
             --r, ++c;
         }
         r = i - 1, c = j - 1;
         while (r >= 0 and c >= 0) {
             if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
                 if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
             if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
                 if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
-            bishopMoves[{i, j}].insert({r, c});
+            if (C == 'B' || C == 'b') bishopMoves[{i, j}].insert({r, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, c});
             --r, --c;
         } 
         r = i + 1, c = j - 1;
         while (r < 8 and c >= 0) {
             if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
                 if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
             if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
                 if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
-            bishopMoves[{i, j}].insert({r, c});
+            if (C == 'B' || C == 'b') bishopMoves[{i, j}].insert({r, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, c});
             ++r, --c;
         }
         r = i + 1, c = j + 1;
         while (r < 8 and c < 8) {
             if (board[r][c] == 'P' || board[r][c] == 'R' || board[r][c] == 'N' || board[r][c] == 'K' || board[r][c] == 'B' || board[r][c] == 'Q') {
                 if (C == 'b') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
             if (board[r][c] == 'p' || board[r][c] == 'r' || board[r][c] == 'n' || board[r][c] == 'k' || board[r][c] == 'b' || board[r][c] == 'q') {
                 if (C == 'B') bishopMoves[{i, j}].insert({r, c});
+                if (C == 'Q') queenMoves[{i, j}].insert({r, c});
                 break;
             }
-            bishopMoves[{i, j}].insert({r, c});
+            if (C == 'B' || C == 'b') bishopMoves[{i, j}].insert({r, c});
+            if (C == 'Q' || C == 'q') queenMoves[{i, j}].insert({r, c});
             ++r, ++c;
         }
     }
@@ -265,6 +294,21 @@ public:
         }
         debug(bishopMoves);
     }
+    void queenValidMoves () {
+        queenMoves.clear();
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                if (board[i][j] == 'Q') {
+                    checkValidSquareForBishop(i, j, 'Q');
+                    checkValidSquareForRook(i, j, 'Q');
+                } else if (board[i][j] == 'q') {
+                    checkValidSquareForBishop(i, j, 'q');
+                    checkValidSquareForRook(i, j, 'q');
+                }
+            }
+        }
+        debug(queenMoves);
+    }
 };
 
 int main () {
@@ -275,6 +319,7 @@ int main () {
         C.rookValidMoves();
         C.knightValidMoves();
         C.bishopValidMoves();
+        C.queenValidMoves();
         C.getInput();
         C.boardMark();
         C.displayBoard();
