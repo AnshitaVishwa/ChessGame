@@ -2,8 +2,7 @@
 #include"class.h"
 
 bool Chess :: check (set<int> pieces, int r, int c) {
-    if (r < 0 || r > 7) return false;
-    if (c > 7 || c < 0) return false;
+    if (r < 0 || r > 7 || c > 7 || c < 0) return false;
     if (pieces.count(board[r][c]) == false) {
         return false;
     }
