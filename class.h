@@ -15,4 +15,6 @@ public:
     void blackPawnMoves(int r, int c, MPS& moves);
     void whitePawnMoves(int r, int c, MPS& moves);
     bool check(set<int> pieces, int r, int c);
+    bool checkValidSquareForKnight (int r, int c, char C, vector<set<int>> pieces);
+    MPS knightValidMoves (char C);
 };
