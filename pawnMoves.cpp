@@ -1,17 +1,12 @@
 // Including the header file for the class
 #include"class.h"
 
-bool Chess :: check (char a, char b, char g, char d, char e, char f, int r, int c) {
+bool Chess :: check (set<int> pieces, int r, int c) {
     if (r < 0 || r > 7) return false;
     if (c > 7 || c < 0) return false;
-    if ( !(board[r][c] == a || 
-           board[r][c] == b || 
-           board[r][c] == g || 
-           board[r][c] == d || 
-           board[r][c] == e || 
-           board[r][c] == f)) {
-            return false;
-        }
+    if (pieces.count(board[r][c]) == false) {
+        return false;
+    }
     return true;
 }
 
@@ -23,7 +18,7 @@ void Chess :: blackPawnMoves(int r, int c, MPS& moves) {
     }
     if (r - 1 >= 0 and board[r - 1][c] == ' ') moves[{r, c}].insert({r - 1, c});
     for (auto& x : cols) {
-        if (check('P', 'Q', 'K', 'N', 'B', 'R', r - 1, x)) moves[{r, c}].insert({r - 1, x});
+        if (check(pieces[1], r - 1, x)) moves[{r, c}].insert({r - 1, x});
     }
 }
 
@@ -35,7 +30,7 @@ void Chess :: whitePawnMoves(int r, int c, MPS& moves) {
     }
     if (r + 1 < 8 and board[r + 1][c] == ' ') moves[{r, c}].insert({r + 1, c});
     for (auto& x : cols) {
-        if (check('p', 'q', 'k', 'n', 'b', 'r', r + 1, x)) moves[{r, c}].insert({r + 1, x});
+        if (check(pieces[0], r + 1, x)) moves[{r, c}].insert({r + 1, x});
     }
 }
 
