@@ -6,7 +6,7 @@ class Chess {
 private:
     char board[8][8];
     vector<set<int>> pieces = {{'p', 'q', 'k', 'n', 'b', 'r'}, {'P', 'Q', 'K', 'N', 'B', 'R'}};
-    set<char> low = {'q', 'b', 'r'}, high = {'R', 'Q', 'B'};
+    set<char> low = {'q', 'b', 'r'}, high = {'Q', 'B', 'R'};
 public:
     Chess();
     vector<pair<int, int>> getInput();
@@ -24,4 +24,5 @@ public:
     bool   checkValidSquareForBishopAdd (int i, int j, int r, int c, char C, MPS & moves);
     void   checkValidSquareForBishop    (int i, int j, char C, MPS & moves);
     MPS    bishopValidMoves             (char C);
+    MPS    queenValidMoves              (char C);
 };

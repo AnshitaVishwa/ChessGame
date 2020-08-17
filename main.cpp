@@ -19,6 +19,8 @@ int main () {
     MPS whiteRookMoves     = C.rookValidMoves  ('R');
     MPS whiteBishopMoves   = C.bishopValidMoves('B');
     MPS blackBishopMoves   = C.bishopValidMoves('b');
+    MPS blackQueenMoves    = C.queenValidMoves('q');
+    MPS whiteQueenMoves    = C.queenValidMoves('Q');
     debug(blackPawnMoves);
     debug(whitePawnMoves);
     debug(whiteRookMoves);
@@ -27,5 +29,7 @@ int main () {
     debug(whiteKnightMoves);
     debug(whiteBishopMoves);
     debug(blackBishopMoves);
+    debug(blackQueenMoves);
+    debug(whiteQueenMoves);
     return 0;
 }
