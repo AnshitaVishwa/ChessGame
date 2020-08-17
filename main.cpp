@@ -11,17 +11,21 @@ int main () {
     vector<pair<int, int>> input = C.getInput();
     C.boardMark(input);
     C.displayBoard();
-    MPS whitePawnMoves = C.pawnValidMoves('P');
-    MPS blackPawnMoves = C.pawnValidMoves('p');
-    MPS whiteKnightMoves = C.knightValidMoves('N');
-    MPS blackKnightMoves = C.knightValidMoves('n');
-    MPS blackRookMoves = C.rookValidMoves('r');
-    MPS whiteRookMoves = C.rookValidMoves('R');
+    MPS whitePawnMoves     = C.pawnValidMoves  ('P');
+    MPS blackPawnMoves     = C.pawnValidMoves  ('p');
+    MPS whiteKnightMoves   = C.knightValidMoves('N');
+    MPS blackKnightMoves   = C.knightValidMoves('n');
+    MPS blackRookMoves     = C.rookValidMoves  ('r');
+    MPS whiteRookMoves     = C.rookValidMoves  ('R');
+    MPS whiteBishopMoves   = C.bishopValidMoves('B');
+    MPS blackBishopMoves   = C.bishopValidMoves('b');
     debug(blackPawnMoves);
     debug(whitePawnMoves);
     debug(whiteRookMoves);
     debug(blackRookMoves);
     debug(blackKnightMoves);
     debug(whiteKnightMoves);
+    debug(whiteBishopMoves);
+    debug(blackBishopMoves);
     return 0;
 }
