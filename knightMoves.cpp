@@ -24,7 +24,7 @@ MPS Chess :: knightValidMoves (char C) {
         for (int j = 0; j < 8; ++j) {
             if (board[i][j] == C) {
                 vector<pair<int, int>> combos = {{i - 2, j + 1}, {i - 2, j - 1}, {i + 2, j + 1}, {i + 2, j - 1},
-                                                 {i - 1, j + 2}, {i - 1, j + 2}, {i - 1, j - 2}, {i + 1, j - 2}};
+                                                 {i - 1, j + 2}, {i + 1, j + 2}, {i - 1, j - 2}, {i + 1, j - 2}};
                 for (auto& [x, y] : combos) {
                     if (checkValidSquareForKnight(x, y, C, pieces)) moves[{i, j}].insert({x, y});
                 }
