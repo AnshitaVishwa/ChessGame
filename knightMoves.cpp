@@ -2,7 +2,7 @@
 #include"class.h"
 
 
-bool Chess :: checkValidSquareForKnight (int r, int c, char C, vector<set<int>> pieces) {
+bool Chess :: checkValidSquareForKnight (int r, int c, char C) {
     if (r < 0 || r > 7 || c < 0 || c > 7) return false;
     if (C == 'N') {
         if (pieces[1].count(board[r][c])) {
@@ -26,7 +26,7 @@ MPS Chess :: knightValidMoves (char C) {
                 vector<pair<int, int>> combos = {{i - 2, j + 1}, {i - 2, j - 1}, {i + 2, j + 1}, {i + 2, j - 1},
                                                  {i - 1, j + 2}, {i + 1, j + 2}, {i - 1, j - 2}, {i + 1, j - 2}};
                 for (auto& [x, y] : combos) {
-                    if (checkValidSquareForKnight(x, y, C, pieces)) moves[{i, j}].insert({x, y});
+                    if (checkValidSquareForKnight(x, y, C)) moves[{i, j}].insert({x, y});
                 }
             }
         }
