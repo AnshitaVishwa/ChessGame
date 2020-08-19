@@ -11,7 +11,7 @@ private:
     bool isPlayerWhite = true;
     vsi pieces = {{'p', 'q', 'k', 'n', 'b', 'r'}, {'P', 'Q', 'K', 'N', 'B', 'R'}};
     set<char> low = {'q', 'b', 'r'}, high = {'Q', 'B', 'R'};
-    spi    allBlackMoves,   allWhiteMoves;
+    spi    allBlackMoves,   allWhiteMoves, blackPiecesPosition, whitePiecesPosition;
     MPS    whitePawnsMoves,  blackPawnsMoves,  whiteKnightMoves, blackKnightMoves, 
            blackRookMoves,  whiteRookMoves,  whiteBishopMoves, blackBishopMoves, 
            blackQueenMoves, whiteQueenMoves, whiteKingMoves,   blackKingMoves;
@@ -32,6 +32,8 @@ private:
     MPS    queenValidMoves              (char C);
     void   allMoves                     ();
     bool   checkValidityOfMoves         (bool isPlayerWhite, int ux, int uy, int vx, int vy);
+    void   checkValidSquareForKing      (int i, int j, int r, int c, char C, MPS & moves);
+    MPS    kingValidMoves               (char C);
 public:
     Chess();
     void   displayBoard                 ();
