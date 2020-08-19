@@ -8,28 +8,8 @@ typedef map<pair<int, int>, set<pair<int, int>>> MPS;
 int main () {
     Chess C;
     C.displayBoard();
-    vector<pair<int, int>> input = C.getInput();
-    C.boardMark(input);
-    C.displayBoard();
-    MPS whitePawnMoves     = C.pawnValidMoves  ('P');
-    MPS blackPawnMoves     = C.pawnValidMoves  ('p');
-    MPS whiteKnightMoves   = C.knightValidMoves('N');
-    MPS blackKnightMoves   = C.knightValidMoves('n');
-    MPS blackRookMoves     = C.rookValidMoves  ('r');
-    MPS whiteRookMoves     = C.rookValidMoves  ('R');
-    MPS whiteBishopMoves   = C.bishopValidMoves('B');
-    MPS blackBishopMoves   = C.bishopValidMoves('b');
-    MPS blackQueenMoves    = C.queenValidMoves('q');
-    MPS whiteQueenMoves    = C.queenValidMoves('Q');
-    debug(blackPawnMoves);
-    debug(whitePawnMoves);
-    debug(whiteRookMoves);
-    debug(blackRookMoves);
-    debug(blackKnightMoves);
-    debug(whiteKnightMoves);
-    debug(whiteBishopMoves);
-    debug(blackBishopMoves);
-    debug(blackQueenMoves);
-    debug(whiteQueenMoves);
+    while (1) {
+        C.initializer();
+    }
     return 0;
 }

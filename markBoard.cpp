@@ -1,9 +1,43 @@
 // Including the header file for the class
 #include"class.h"
 
-void Chess :: boardMark(vector<pair<int, int>> input) {
+
+bool Chess :: checkValidityOfMoves (bool isPlayerWhite, int ux, int uy, int vx, int vy) {
+    if (isPlayerWhite) {
+        if (whitePawnsMoves.count({ux, uy}) and whitePawnsMoves[{ux, uy}].count({vx, vy})) return true;
+        if (whiteRookMoves.count({ux, uy}) and whiteRookMoves[{ux, uy}].count({vx, vy})) return true;
+        if (whiteKnightMoves.count({ux, uy}) and whiteKnightMoves[{ux, uy}].count({vx, vy})) return true;
+        if (whiteBishopMoves.count({ux, uy}) and whiteBishopMoves[{ux, uy}].count({vx, vy})) return true;
+        if (whiteQueenMoves.count({ux, uy}) and whiteQueenMoves[{ux, uy}].count({vx, vy})) return true;
+    } else {
+        if (blackPawnsMoves.count({ux, uy}) and blackPawnsMoves[{ux, uy}].count({vx, vy})) return true;
+        if (blackRookMoves.count({ux, uy}) and blackRookMoves[{ux, uy}].count({vx, vy})) return true;
+        if (blackKnightMoves.count({ux, uy}) and blackKnightMoves[{ux, uy}].count({vx, vy})) return true;
+        if (blackBishopMoves.count({ux, uy}) and blackBishopMoves[{ux, uy}].count({vx, vy})) return true;
+        if (blackQueenMoves.count({ux, uy}) and blackQueenMoves[{ux, uy}].count({vx, vy})) return true;
+    }
+    return false;
+}
+
+
+void Chess :: boardMark(vpi input) {
     pair<int, int> u = input[0], v = input[1];
     int ux = u.first, uy = u.second, vx = v.first, vy = v.second;
-    board[vx][vy] = board[ux][uy];
-    board[ux][uy] = ' ';
+    if (isPlayerWhite) {
+        if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            board[vx][vy] = board[ux][uy];
+            board[ux][uy] = ' ';
+        } else {
+            vpi input = getInput();
+            boardMark(input);
+        }
+    } else {
+        if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            board[vx][vy] = board[ux][uy];
+            board[ux][uy] = ' ';
+        } else {
+            vpi input = getInput();
+            boardMark(input);
+        }
+    }
 }
