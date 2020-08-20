@@ -6,19 +6,22 @@ typedef vector<pair<int, int>> vpi;
 typedef vector<set<char>> vsc;
 typedef set<pair<int, int>> spi;
 typedef map<pair<int, int>, bool> mpb;
+typedef pair<int, int> pi;
 
 class Chess {
 private:
     char   board[8][8];
     mpb    castlePositions = {{{0, 0}, false}, {{0, 7}, false}, {{7, 0}, false}, {{7, 7}, false}, {{0, 3}, false}, {{7, 3}, false}};
-    bool   isPlayerWhite = true, blackEnpassant = false, whiteEnpassant = false;
+    bool   isPlayerWhite = true, blackEnpassant = false, whiteEnpassant = false, blackKingUnderCheck = false, whiteKingUnderCheck = false;
     int    prevUx = -1, prevUy = -1, prevVx = -1, prevVy = -1;
+    pi     whiteKing = {0, 3}, blackKing = {7, 3};
     vsc    pieces = {{'p', 'q', 'k', 'n', 'b', 'r'}, {'P', 'Q', 'K', 'N', 'B', 'R'}};
     set<char> low = {'q', 'b', 'r'}, high = {'Q', 'B', 'R'};
     spi    allBlackMoves,   allWhiteMoves,   blackPiecesPosition, whitePiecesPosition;
     MPS    whitePawnsMoves, blackPawnsMoves, whiteKnightMoves,    blackKnightMoves, 
            blackRookMoves,  whiteRookMoves,  whiteBishopMoves,    blackBishopMoves, 
-           blackQueenMoves, whiteQueenMoves, whiteKingMoves,      blackKingMoves;
+           blackQueenMoves, whiteQueenMoves, whiteKingMoves,      blackKingMoves, 
+           movesByWhiteUnderCheck, movesByBlackUnderCheck;
     vpi    getInput                     ();
     void   boardMark                    (vpi input);
     bool   check                        (set<char> pieces, int r, int c);

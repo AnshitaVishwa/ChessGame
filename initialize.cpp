@@ -79,8 +79,14 @@ void Chess :: allMoves () {
     blackPiecesPosition = bps;
     allWhiteMoves       = awm;
     allBlackMoves       = abm;
-    whiteKingMoves = kingValidMoves('K');
-    blackKingMoves = kingValidMoves('k');
+    whiteKingMoves      = kingValidMoves('K');
+    blackKingMoves      = kingValidMoves('k');
+    if (allBlackMoves.count(whiteKing) and isPlayerWhite) {
+        whiteKingUnderCheck = true;
+    }
+    if (allWhiteMoves.count(blackKing) and !isPlayerWhite) {
+        blackKingUnderCheck = true;
+    }
 }
 
 void Chess :: initializer () {
