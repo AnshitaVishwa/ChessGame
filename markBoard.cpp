@@ -33,6 +33,10 @@ void Chess :: boardMark(vpi input) {
             }
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
+            // white pawn promotion
+            if (vx == 7 and board[vx][vy] == 'P') {
+                board[vx][vy] = 'Q';
+            }
         } else {
             vpi input = getInput();
             boardMark(input);
@@ -45,6 +49,10 @@ void Chess :: boardMark(vpi input) {
             }
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
+            // black pawn promotion
+            if (vx == 0 and board[vx][vy] == 'p') {
+                board[vx][vy] = 'q';
+            }
         } else {
             vpi input = getInput();
             boardMark(input);

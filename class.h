@@ -28,13 +28,13 @@ private:
     void   checkValidSquareForRook      (int i, int j, char C, MPS& moves);
     bool   checkValidSquareForRookAdd   (int i, int j, int v, MPS& moves, bool horizontal, char C);
     MPS    rookValidMoves               (char C);
-    bool   checkValidSquareForBishopAdd (int i, int j, int r, int c, char C, MPS & moves);
+    bool   checkValidSquareForBishopAdd (int i, int j, int r, int c, char C, MPS& moves);
     void   checkValidSquareForBishop    (int i, int j, char C, MPS & moves);
     MPS    bishopValidMoves             (char C);
     MPS    queenValidMoves              (char C);
     void   allMoves                     ();
     bool   checkValidityOfMoves         (bool isPlayerWhite, int ux, int uy, int vx, int vy);
-    void   checkValidSquareForKing      (int i, int j, int r, int c, char C, MPS & moves);
+    void   checkValidSquareForKing      (int i, int j, int r, int c, char C, MPS& moves);
     MPS    kingValidMoves               (char C);
 public:
     Chess();

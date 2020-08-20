@@ -20,13 +20,9 @@ void Chess :: blackPawnMoves(int r, int c, MPS& moves) {
     // En passant rule applied for the Black Pawn
     if (r == 3) {
         for (auto& x : cols) {
-            cout << "1\n";
             if (x >= 0 and x < 8) {
-                cout << "1\n";
                 if (board[r][x] == 'P') {
-                    cout << "1\n";
                     if (prevUx == 1 and prevUy == x and prevVx == 3 and prevVy == x) {
-                        cout << "1\n";
                         moves[{r, c}].insert({r - 1, x});
                         blackEnpassant = true;
                     }
@@ -34,6 +30,7 @@ void Chess :: blackPawnMoves(int r, int c, MPS& moves) {
             }
         }
     }
+
 
     for (auto& x : cols) {
         if (check(pieces[1], r - 1, x)) moves[{r, c}].insert({r - 1, x});
