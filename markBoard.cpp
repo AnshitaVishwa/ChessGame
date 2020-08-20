@@ -27,10 +27,37 @@ void Chess :: boardMark(vpi input) {
     int ux = u.first, uy = u.second, vx = v.first, vy = v.second;
     if (isPlayerWhite) {
         if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            // castling rule 
+            // checking if king and rook ever moved
+            if (ux == 0 and uy == 0 and board[ux][uy] == 'R' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true;
+            } else if (ux == 0 and uy == 7 and board[ux][uy] == 'R' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true; 
+            } else if (ux == 0 and uy == 3 and board[ux][uy] == 'K' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true;
+            } else if (vx == 7 and vy == 0 and board[vx][vy] == 'r' and castlePositions[{vx, vy}] == false) {
+                castlePositions[{vx, vy}] = true;
+            } else if (vx == 7 and vy == 7 and board[vx][vy] == 'r' and castlePositions[{vx, vy}] == false) {
+                castlePositions[{vx, vy}] = true;
+            }
+            // if queen side castling validated
+            if (ux == 0 and uy == 3 and vx == 0 and vy == 5) {
+                board[0][4] = 'R';
+                board[0][7] = ' ';
+                castlePositions[{0, 7}] = true;
+            }
+            // if king side castling validated
+            if (ux == 0 and uy == 3 and vx == 0 and vy == 1) {
+                board[0][2] = 'R';
+                board[0][0] = ' ';
+                castlePositions[{0, 0}] = true;
+            }
+            // white Enpassant 
             if (whiteEnpassant) {
                 board[ux][vy] = ' ';
                 whiteEnpassant = false;
             }
+            //board mark
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
             // white pawn promotion
@@ -43,10 +70,37 @@ void Chess :: boardMark(vpi input) {
         }
     } else {
         if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            // castling rule 
+            // checking if king and rook ever moved
+            if (ux == 7 and uy == 0 and board[ux][uy] == 'r' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true;
+            } else if (ux == 7 and uy == 7 and board[ux][uy] == 'r' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true; 
+            } else if (ux == 7 and uy == 3 and board[ux][uy] == 'k' and castlePositions[{ux, uy}] == false) {
+                castlePositions[{ux, uy}] = true;
+            } else if (vx == 0 and vy == 0 and board[vx][vy] == 'R' and castlePositions[{vx, vy}] == false) {
+                castlePositions[{vx, vy}] = true;
+            } else if (vx == 0 and vy == 7 and board[vx][vy] == 'R' and castlePositions[{vx, vy}] == false) {
+                castlePositions[{vx, vy}] = true;
+            }
+            // if queen side castling validated
+            if (ux == 7 and uy == 3 and vx == 7 and vy == 5) {
+                board[7][4] = 'R';
+                board[7][7] = ' ';
+                castlePositions[{7, 7}] = true;
+            }
+            // if king side castling validated
+            if (ux == 7 and uy == 3 and vx == 7 and vy == 1) {
+                board[7][2] = 'R';
+                board[7][0] = ' ';
+                castlePositions[{7, 0}] = true;
+            }
+            // black Enpassant
             if (blackEnpassant) {
                 board[ux][vy] = ' ';
                 blackEnpassant = false;
             }
+            // board mark
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
             // black pawn promotion
