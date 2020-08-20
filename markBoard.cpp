@@ -27,6 +27,10 @@ void Chess :: boardMark(vpi input) {
     int ux = u.first, uy = u.second, vx = v.first, vy = v.second;
     if (isPlayerWhite) {
         if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            if (whiteEnpassant) {
+                board[ux][vy] = ' ';
+                whiteEnpassant = false;
+            }
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
         } else {
@@ -35,6 +39,10 @@ void Chess :: boardMark(vpi input) {
         }
     } else {
         if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
+            if (blackEnpassant) {
+                board[ux][vy] = ' ';
+                blackEnpassant = false;
+            }
             board[vx][vy] = board[ux][uy];
             board[ux][uy] = ' ';
         } else {
@@ -42,4 +50,7 @@ void Chess :: boardMark(vpi input) {
             boardMark(input);
         }
     }
+    prevUx = ux, prevUy = uy, prevVx = vx, prevVy = vy;
+    // cout << prevUx << " " << prevUy << " " << prevVx << " " << prevVy << " " << prevPiece << "\n";
+    // debug(prevPiece, prevUx, prevUy, prevVx, prevVy);
 }

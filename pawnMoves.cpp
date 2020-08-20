@@ -1,7 +1,7 @@
 // Including the header file for the class
 #include"class.h"
 
-bool Chess :: check (set<int> pieces, int r, int c) {
+bool Chess :: check (set<char> pieces, int r, int c) {
     if (r < 0 || r > 7 || c > 7 || c < 0) return false;
     if (pieces.count(board[r][c]) == false) {
         return false;
@@ -16,6 +16,25 @@ void Chess :: blackPawnMoves(int r, int c, MPS& moves) {
         if (board[r - 1][c] == ' ' and board[r - 2][c] == ' ') moves[{r, c}].insert({r - 2, c});
     }
     if (r - 1 >= 0 and board[r - 1][c] == ' ') moves[{r, c}].insert({r - 1, c});
+
+    // En passant rule applied for the Black Pawn
+    if (r == 3) {
+        for (auto& x : cols) {
+            cout << "1\n";
+            if (x >= 0 and x < 8) {
+                cout << "1\n";
+                if (board[r][x] == 'P') {
+                    cout << "1\n";
+                    if (prevUx == 1 and prevUy == x and prevVx == 3 and prevVy == x) {
+                        cout << "1\n";
+                        moves[{r, c}].insert({r - 1, x});
+                        blackEnpassant = true;
+                    }
+                }
+            }
+        }
+    }
+
     for (auto& x : cols) {
         if (check(pieces[1], r - 1, x)) moves[{r, c}].insert({r - 1, x});
     }
@@ -28,6 +47,21 @@ void Chess :: whitePawnMoves(int r, int c, MPS& moves) {
         if (board[r + 1][c] == ' ' and board[r + 2][c] == ' ') moves[{r, c}].insert({r + 2, c});
     }
     if (r + 1 < 8 and board[r + 1][c] == ' ') moves[{r, c}].insert({r + 1, c});
+
+    // En passant rule applied for the White Pawn
+    if (r == 4) {
+        for (auto& x : cols) {
+            if (x >= 0 and x < 8) {
+                if (board[r][x] == 'p') {
+                    if (prevUx == 6 and prevUy == x and prevVx == 4 and prevVy == x) {
+                        moves[{r, c}].insert({r + 1, x});
+                        whiteEnpassant = true;
+                    }
+                }
+            }
+        }
+    }
+
     for (auto& x : cols) {
         if (check(pieces[0], r + 1, x)) moves[{r, c}].insert({r + 1, x});
     }

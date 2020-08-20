@@ -2,8 +2,8 @@
 #include"class.h"
 
 void Chess :: allMoves () {
-    whitePawnsMoves     = pawnValidMoves  ('P');
-    blackPawnsMoves     = pawnValidMoves  ('p');
+    whitePawnsMoves    = pawnValidMoves  ('P');
+    blackPawnsMoves    = pawnValidMoves  ('p');
     whiteKnightMoves   = knightValidMoves('N');
     blackKnightMoves   = knightValidMoves('n');
     blackRookMoves     = rookValidMoves  ('r');
