@@ -40,7 +40,7 @@ int main()
                             vx =  position.x, vy = position.y;
                             ++firstClick;
                         }
-                        cout << ux << " " << uy << " " << vx << " " << vy << " " << firstClick << endl;
+                        // cout << ux << " " << uy << " " << vx << " " << vy << " " << firstClick << endl;
                     }
             }
             window.clear();
@@ -170,7 +170,7 @@ int main()
                 y += 75;
             }
             // object
-            cout << Ux << " " << Uy << " " << Vx << " " << Vy << " " << firstClick << endl;
+            // cout << Ux << " " << Uy << " " << Vx << " " << Vy << " " << firstClick << endl;
             C.getMouseCoordinates(Ux, Uy, Vx, Vy);
             C.initializer();
             window.display();
