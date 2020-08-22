@@ -64,10 +64,11 @@ void Chess :: boardMark(vpi input) {
             if (vx == 7 and board[vx][vy] == 'P') {
                 board[vx][vy] = 'Q';
             }
-        } else {
-            vpi input = getInput();
-            boardMark(input);
-        }
+        } 
+        // else {
+        //     vpi input = getInput();
+        //     boardMark(input);
+        // }
     } else {
         if (checkValidityOfMoves(isPlayerWhite, ux, uy, vx, vy)) {
             // castling rule 
@@ -107,10 +108,11 @@ void Chess :: boardMark(vpi input) {
             if (vx == 0 and board[vx][vy] == 'p') {
                 board[vx][vy] = 'q';
             }
-        } else {
-            vpi input = getInput();
-            boardMark(input);
-        }
+        } 
+        // else {
+        //     vpi input = getInput();
+        //     boardMark(input);
+        // }
     }
     prevUx = ux, prevUy = uy, prevVx = vx, prevVy = vy;
     // cout << prevUx << " " << prevUy << " " << prevVx << " " << prevVy << " " << prevPiece << "\n";

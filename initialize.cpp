@@ -91,8 +91,8 @@ void Chess :: allMoves () {
 
 void Chess :: initializer () {
     allMoves();
-    vpi input = getInput();
+    vpi input = getInput(mouseUx, mouseUy, mouseVx, mouseVy);
     boardMark(input);
-    displayBoard();
+    // displayBoard();
     isPlayerWhite = !isPlayerWhite;
 }

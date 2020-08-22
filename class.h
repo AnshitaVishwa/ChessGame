@@ -13,7 +13,7 @@ private:
     char   board[8][8];
     mpb    castlePositions = {{{0, 0}, false}, {{0, 7}, false}, {{7, 0}, false}, {{7, 7}, false}, {{0, 3}, false}, {{7, 3}, false}};
     bool   isPlayerWhite = true, blackEnpassant = false, whiteEnpassant = false, blackKingUnderCheck = false, whiteKingUnderCheck = false;
-    int    prevUx = -1, prevUy = -1, prevVx = -1, prevVy = -1;
+    int    prevUx = -1, prevUy = -1, prevVx = -1, prevVy = -1, mouseUx, mouseUy, mouseVx, mouseVy;
     pi     whiteKing = {0, 3}, blackKing = {7, 3};
     vsc    pieces = {{'p', 'q', 'k', 'n', 'b', 'r'}, {'P', 'Q', 'K', 'N', 'B', 'R'}};
     set<char> low = {'q', 'b', 'r'}, high = {'Q', 'B', 'R'};
@@ -22,7 +22,7 @@ private:
            blackRookMoves,  whiteRookMoves,  whiteBishopMoves,    blackBishopMoves, 
            blackQueenMoves, whiteQueenMoves, whiteKingMoves,      blackKingMoves, 
            movesByWhiteUnderCheck, movesByBlackUnderCheck;
-    vpi    getInput                     ();
+    vpi    getInput                     (int mouseUx, int mouseUy, int mouseVx, int mouseVy);
     void   boardMark                    (vpi input);
     bool   check                        (set<char> pieces, int r, int c);
     void   blackPawnMoves               (int r, int c, MPS& moves);
@@ -43,6 +43,8 @@ private:
     MPS    kingValidMoves               (char C);
 public:
     Chess();
+    char*  getBoard                     ();
+    void   getMouseCoordinates          (int ux, int uy, int vx, int vy);
     void   displayBoard                 ();
     void   initializer                  ();
 };
