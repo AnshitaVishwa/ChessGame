@@ -43,7 +43,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(600, 600), "Chess Game");
         sf :: RectangleShape rectangle[8][8];
-        int board[8][8];
+        int board[8][8], n, m;
         makeBoard(board);
         // Load the image
         sf::Texture texture;
@@ -58,11 +58,16 @@ int main()
             {
                 switch (event.type)
                 {
-                case sf :: Event :: EventType :: Closed :
-                    window.close();
-                    break;
+                    case sf :: Event :: EventType :: Closed :
+                        window.close();
                         break;
                 }
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                    {
+                        sf :: Vector2i position = sf::Mouse::getPosition(window);
+                        n = position.x, m = position.y;
+                        cout << n  << " " << m << endl;
+                    }
             }
             window.clear();
             int x = 0, y = 0;
@@ -171,6 +176,22 @@ int main()
                         if (i % 2 == 0 and j % 2 == 1) sprite.setColor(sf::Color::White);
                         if (i % 2 == 1 and j % 2 == 0) sprite.setColor(sf::Color::White);
                         window.draw(sprite);
+                    }
+                    x += 75;
+                }
+                y += 75;
+            }
+            x = 0, y = 0;
+            for (int i = 0; i < 8; ++i) {
+                x = 0;
+                for (int j = 0; j < 8; ++j) {
+                    rectangle[i][j].setSize(sf::Vector2f(75, 75));
+                    rectangle[i][j].setOutlineColor(sf::Color::Blue);
+                    rectangle[i][j].setOutlineThickness(2);
+                    rectangle[i][j].setPosition(x, y);
+                    if (n >= x and n < x + 75 and m >= y and m < y + 75) {
+                        rectangle[i][j].setFillColor(sf::Color::Red);
+                        window.draw(rectangle[i][j]);
                     }
                     x += 75;
                 }
