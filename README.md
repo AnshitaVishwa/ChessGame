@@ -10,8 +10,9 @@ You can play this project with your partner by:
 1. Open the terminal.
 2. type : git clone https://github.com/AnshitaVishwa/ChessGame.git
 3. cd ChessGame
-4. Compile the project using : g++ *.cpp -lsfml-system -lsfml-window -lsfml-graphics -g -fsanitize=address,undefined
-5. Run it by : ./a.out
+4. Install the SFML library using the given command: sudo apt install libsfml-dev
+5. Compile the project using : g++ *.cpp -lsfml-system -lsfml-window -lsfml-graphics -g -fsanitize=address,undefined
+6. Run it by : ./a.out
 
 And here You go : Enjoy :) And Play The Game
 
